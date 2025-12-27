@@ -1,0 +1,94 @@
+# Build output
+target/
+build/
+out/
+bin/
+
+# IDE - Eclipse
+.project
+.classpath
+.settings/
+*.launch
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IDE - VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IDE - NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+*.gradle
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temp files
+*.tmp
+*.temp
+*.swp
+*.bak
+*~
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+*.properties.local
+application-local.yml
+application-local.properties
+
+# eGovFrame specific
+globals.properties.local
+
+# Package files
+*.jar
+*.war
+*.ear
+*.rar
+
+# Test output
+test-output/
+surefire-reports/
+
+# Database
+*.db
+*.sqlite
+h2/
