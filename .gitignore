@@ -92,3 +92,6 @@ surefire-reports/
 *.db
 *.sqlite
 h2/
+
+# Claude
+.claude/
