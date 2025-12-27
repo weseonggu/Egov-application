@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="egovframework.member.signup.repository.MemberSignupMapper">
+
+    <!-- 결과 매핑 -->
+    <resultMap id="memberResultMap" type="MemberVO">
+        <id property="memberId" column="MEMBER_ID"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="email" column="EMAIL"/>
+        <result property="phone" column="PHONE"/>
+        <result property="status" column="STATUS"/>
+        <result property="role" column="ROLE"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="lastLoginAt" column="LAST_LOGIN_AT"/>
+    </resultMap>
+
+    <!-- 회원 등록 -->
+    <insert id="insertMember" parameterType="MemberVO">
+        INSERT INTO TB_MEMBER (
+            MEMBER_ID,
+            PASSWORD,
+            MEMBER_NAME,
+            EMAIL,
+            PHONE,
+            STATUS,
+            ROLE,
+            CREATED_AT,
+            UPDATED_AT
+        ) VALUES (
+            #{memberId},
+            #{password},
+            #{memberName},
+            #{email},
+            #{phone},
+            #{status, jdbcType=VARCHAR},
+            #{role, jdbcType=VARCHAR},
+            CURRENT_TIMESTAMP,
+            CURRENT_TIMESTAMP
+        )
+    </insert>
+
+    <!-- 회원 ID로 조회 -->
+    <select id="selectMemberById" parameterType="String" resultMap="memberResultMap">
+        SELECT
+            MEMBER_ID,
+            PASSWORD,
+            MEMBER_NAME,
+            EMAIL,
+            PHONE,
+            STATUS,
+            ROLE,
+            CREATED_AT,
+            UPDATED_AT,
+            LAST_LOGIN_AT
+        FROM TB_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <!-- 이메일로 조회 -->
+    <select id="selectMemberByEmail" parameterType="String" resultMap="memberResultMap">
+        SELECT
+            MEMBER_ID,
+            PASSWORD,
+            MEMBER_NAME,
+            EMAIL,
+            PHONE,
+            STATUS,
+            ROLE,
+            CREATED_AT,
+            UPDATED_AT,
+            LAST_LOGIN_AT
+        FROM TB_MEMBER
+        WHERE EMAIL = #{email}
+    </select>
+
+    <!-- 회원 ID 중복 체크 -->
+    <select id="checkMemberIdExists" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <!-- 이메일 중복 체크 -->
+    <select id="checkEmailExists" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_MEMBER
+        WHERE EMAIL = #{email}
+    </select>
+
+    <!-- 회원 정보 수정 -->
+    <update id="updateMember" parameterType="MemberVO">
+        UPDATE TB_MEMBER
+        SET
+            MEMBER_NAME = #{memberName},
+            EMAIL = #{email},
+            PHONE = #{phone},
+            UPDATED_AT = CURRENT_TIMESTAMP
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <!-- 비밀번호 변경 -->
+    <update id="updatePassword" parameterType="MemberVO">
+        UPDATE TB_MEMBER
+        SET
+            PASSWORD = #{password},
+            UPDATED_AT = CURRENT_TIMESTAMP
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <!-- 마지막 로그인 시간 업데이트 -->
+    <update id="updateLastLogin" parameterType="String">
+        UPDATE TB_MEMBER
+        SET LAST_LOGIN_AT = CURRENT_TIMESTAMP
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <!-- 회원 상태 변경 -->
+    <update id="updateStatus" parameterType="map">
+        UPDATE TB_MEMBER
+        SET
+            STATUS = #{status},
+            UPDATED_AT = CURRENT_TIMESTAMP
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <!-- 회원 삭제 -->
+    <delete id="deleteMember" parameterType="String">
+        DELETE FROM TB_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
+
+</mapper>

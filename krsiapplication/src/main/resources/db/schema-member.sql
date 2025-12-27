@@ -1,0 +1,45 @@
+-- ============================================
+-- 회원 테이블 스키마 (Oracle)
+-- ============================================
+
+-- 기존 테이블 삭제 (개발용)
+-- DROP TABLE TB_MEMBER CASCADE CONSTRAINTS;
+-- DROP SEQUENCE SEQ_MEMBER;
+
+-- 회원 테이블
+CREATE TABLE TB_MEMBER (
+    MEMBER_ID       VARCHAR2(50)    PRIMARY KEY,            -- 회원 ID (로그인 ID)
+    PASSWORD        VARCHAR2(255)   NOT NULL,               -- 비밀번호 (BCrypt 암호화)
+    MEMBER_NAME     VARCHAR2(100)   NOT NULL,               -- 회원명
+    EMAIL           VARCHAR2(100)   NOT NULL UNIQUE,        -- 이메일
+    PHONE           VARCHAR2(20),                           -- 전화번호
+    STATUS          VARCHAR2(20)    DEFAULT 'ACTIVE',       -- 상태 (ACTIVE, INACTIVE, SUSPENDED)
+    ROLE            VARCHAR2(20)    DEFAULT 'USER',         -- 권한 (USER, ADMIN)
+    CREATED_AT      TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,  -- 생성일시
+    UPDATED_AT      TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,  -- 수정일시
+    LAST_LOGIN_AT   TIMESTAMP                               -- 마지막 로그인 일시
+);
+
+-- 회원 ID 시퀀스 (자동 생성용)
+CREATE SEQUENCE SEQ_MEMBER
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+
+-- 인덱스
+CREATE INDEX IDX_MEMBER_EMAIL ON TB_MEMBER(EMAIL);
+CREATE INDEX IDX_MEMBER_STATUS ON TB_MEMBER(STATUS);
+
+-- 코멘트
+COMMENT ON TABLE TB_MEMBER IS '회원 정보 테이블';
+COMMENT ON COLUMN TB_MEMBER.MEMBER_ID IS '회원 ID (로그인 ID)';
+COMMENT ON COLUMN TB_MEMBER.PASSWORD IS '비밀번호 (BCrypt 암호화)';
+COMMENT ON COLUMN TB_MEMBER.MEMBER_NAME IS '회원명';
+COMMENT ON COLUMN TB_MEMBER.EMAIL IS '이메일';
+COMMENT ON COLUMN TB_MEMBER.PHONE IS '전화번호';
+COMMENT ON COLUMN TB_MEMBER.STATUS IS '상태 (ACTIVE, INACTIVE, SUSPENDED)';
+COMMENT ON COLUMN TB_MEMBER.ROLE IS '권한 (USER, ADMIN)';
+COMMENT ON COLUMN TB_MEMBER.CREATED_AT IS '생성일시';
+COMMENT ON COLUMN TB_MEMBER.UPDATED_AT IS '수정일시';
+COMMENT ON COLUMN TB_MEMBER.LAST_LOGIN_AT IS '마지막 로그인 일시';

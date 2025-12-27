@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- 언더스코어를 카멜케이스로 자동 변환 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- NULL 값 처리 -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <!-- 지연 로딩 설정 -->
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <!-- 캐시 사용 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!-- 회원 VO -->
+        <typeAlias alias="MemberVO" type="egovframework.member.signup.dto.MemberVO"/>
+    </typeAliases>
+</configuration>
