@@ -1,0 +1,6 @@
+# Oracle Database 설정
+ORACLE_PASSWORD=oracle123
+
+# 애플리케이션 사용자
+APP_USER=krsi_user
+APP_USER_PASSWORD=krsi_pass
