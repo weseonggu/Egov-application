@@ -1,4 +1,4 @@
-package egovframework.example;
+package egovframework;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

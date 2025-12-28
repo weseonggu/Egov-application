@@ -1,4 +1,4 @@
-package egovframework.config;
+package egovframework.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,15 +35,8 @@ public class SecurityConfig {
             // CSRF 설정 (API 서버용으로 비활성화, 필요시 활성화)
             .csrf(csrf -> csrf.disable())
 
-            // 요청 권한 설정
+            // 요청 권한 설정 (임시: 모든 요청 허용)
             .authorizeHttpRequests(auth -> auth
-                // 회원가입 API는 인증 없이 접근 허용
-                .requestMatchers("/api/member/signup/**").permitAll()
-                // Swagger UI 접근 허용
-                .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**").permitAll()
-                // 정적 리소스 접근 허용
-                .requestMatchers("/static/**", "/css/**", "/js/**", "/img/**").permitAll()
-                // 그 외 요청은 인증 필요 (필요에 따라 조정)
                 .anyRequest().permitAll()
             )
 
