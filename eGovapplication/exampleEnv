@@ -1,0 +1,13 @@
+# ============================================
+# 민감 정보 설정 파일
+# 이 파일을 .env로 복사하여 사용하세요
+# .env 파일은 Git에서 제외됩니다
+# ============================================
+
+# Oracle Database
+DB_URL=jdbc:oracle:thin:@localhost:1521/XEPDB1
+DB_USERNAME=krsi_user
+DB_PASSWORD=krsi_pass
+
+# Application Port
+APP_PORT=8080

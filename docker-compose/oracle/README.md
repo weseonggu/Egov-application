@@ -5,7 +5,12 @@
 ## 빠른 시작
 
 ```bash
-# 컨테이너 시작
+# 1. 환경 변수 파일 생성 (최초 1회)
+cp exampleEnv .env
+
+# 2. 필요시 .env 파일 수정 (비밀번호 등)
+
+# 3. 컨테이너 시작
 docker-compose up -d
 
 # 로그 확인 (초기화에 5-10분 소요)
@@ -76,6 +81,16 @@ docker exec -it oracle-21c-xe sqlplus krsi_user/krsi_pass@XEPDB1
 
 - 알파벳 순서로 실행
 - 파일명에 번호 접두사 권장 (예: `01_create_schema.sql`)
+
+## 환경 변수 설정
+
+`exampleEnv` 파일을 `.env`로 복사하여 사용합니다. `.env` 파일은 Git에서 제외됩니다.
+
+| 변수 | 설명 | 기본값 |
+|------|------|--------|
+| `ORACLE_PASSWORD` | SYS/SYSTEM 비밀번호 | oracle123 |
+| `APP_USER` | 애플리케이션 DB 사용자 | krsi_user |
+| `APP_USER_PASSWORD` | 애플리케이션 DB 비밀번호 | krsi_pass |
 
 ## 트러블슈팅
 
