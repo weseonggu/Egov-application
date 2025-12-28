@@ -1,8 +1,8 @@
 package egovframework.config.database.propertiesObject;
 
 /**
- * ?곗댄곕??댁??ㅼ ?명고?댁?
- * ?ㅼ? ?곗댄곗?????? ???명고?댁ㅻ? 援ы
+ * 데이터베이스 설정 인터페이스
+ * 다양한 데이터베이스 설정을 위한 공통 인터페이스를 구현
  */
 public interface DataBaseProperties {
 

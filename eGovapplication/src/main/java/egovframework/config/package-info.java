@@ -1,137 +1,122 @@
 /**
- * ??由ъ??댁 ?ㅼ 鍮(Configuration Bean) ?⑦ㅼ?
+ * 애플리케이션 설정 Bean(Configuration Bean) 패키지
  *
- * <h2>?⑦ㅼ? 援ъ“</h2>
+ * <h2>패키지 구조</h2>
  * <pre>
  * config/
- * ??? database/                    ? DataSource ?ㅼ
- * ?   ??? ApplicationConfigDatasource.java
- * ?   ??? propertiesObject/        ? DB ?곌껐 ???
- * ?       ??? DataBaseProperties.java
- * ?       ??? BasicDataBaseProperties.java
- * ??? mybatis/                     ? MyBatis ?ㅼ
- * ?   ??? BasicDBConfigMapper.java
- * ??? security/                    ? Spring Security ?ㅼ
- * ?   ??? SecurityConfig.java
- * ??? swagger/                     ? OpenAPI/Swagger ?ㅼ
- * ?   ??? SwaggerConfig.java
- * ??? transaction/                 ? ?몃?? ?ㅼ
- *     ??? EgovConfigTransaction.java
+ * ├── database/                    - DataSource 설정
+ * │   ├── ApplicationConfigDatasource.java
+ * │   └── propertiesObject/        - DB 접속 정보 클래스
+ * │       ├── DataBaseProperties.java
+ * │       └── BasicDataBaseProperties.java
+ * ├── mybatis/                     - MyBatis 설정
+ * │   └── BasicDBConfigMapper.java
+ * ├── security/                    - Spring Security 설정
+ * │   └── SecurityConfig.java
+ * ├── swagger/                     - OpenAPI/Swagger 설정
+ * │   └── SwaggerConfig.java
+ * └── transaction/                 - 트랜잭션 설정
+ *     └── EgovConfigTransaction.java
  * </pre>
  *
- * <h2>?? ?⑦ㅼ? ???/h2>
+ * <h2>주요 패키지 설명</h2>
  *
- * <h3>1. database - DataSource ?ㅼ</h3>
+ * <h3>1. database - DataSource 설정</h3>
  * <table border="1">
- *   <tr><th>?대??/th><th>鍮 ?대?</th><th>??</th></tr>
+ *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
  *     <td>{@link egovframework.config.database.ApplicationConfigDatasource}</td>
  *     <td>basicDataSource</td>
- *     <td>HikariCP 湲곕? DataSource ???/td>
+ *     <td>HikariCP 기반 DataSource 생성</td>
  *   </tr>
  *   <tr>
  *     <td>{@link egovframework.config.database.propertiesObject.BasicDataBaseProperties}</td>
  *     <td>basicDatabaseProperties</td>
- *     <td>application.properties?? DB ?곌껐 ?蹂?諛?몃?/td>
+ *     <td>application.properties의 DB 접속 정보 바인딩</td>
  *   </tr>
  * </table>
  *
- * <h3>2. mybatis - MyBatis ?ㅼ</h3>
+ * <h3>2. mybatis - MyBatis 설정</h3>
  * <table border="1">
- *   <tr><th>?대??/th><th>鍮 ?대?</th><th>??</th></tr>
+ *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
  *     <td rowspan="2">{@link egovframework.config.mybatis.BasicDBConfigMapper}</td>
  *     <td>basicSqlSession</td>
- *     <td>SqlSessionFactory - MyBatis ?ㅼ 諛 Mapper XML 濡??/td>
+ *     <td>SqlSessionFactory - MyBatis 설정 및 Mapper XML 로드</td>
  *   </tr>
  *   <tr>
  *     <td>basicSqlSessionTemplate</td>
- *     <td>SqlSessionTemplate - ?ㅼ SQL ?ㅽ ?대?/td>
+ *     <td>SqlSessionTemplate - 실제 SQL 실행 담당</td>
  *   </tr>
  * </table>
- * <p>{@code @MapperScan}?쇰? {@code egovframework.mapper} ?⑦ㅼ?? Mapper ?명고?댁??? ?ㅼ?</p>
+ * <p>{@code @MapperScan}으로 {@code egovframework.mapper} 패키지의 Mapper 인터페이스를 스캔</p>
  *
- * <h3>3. security - Spring Security ?ㅼ</h3>
+ * <h3>3. security - Spring Security 설정</h3>
  * <table border="1">
- *   <tr><th>?대??/th><th>鍮 ?대?</th><th>??</th></tr>
+ *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
  *     <td rowspan="2">{@link egovframework.config.security.SecurityConfig}</td>
  *     <td>passwordEncoder</td>
- *     <td>BCryptPasswordEncoder - 鍮諛踰????명</td>
+ *     <td>BCryptPasswordEncoder - 비밀번호 암호화</td>
  *   </tr>
  *   <tr>
  *     <td>filterChain</td>
- *     <td>SecurityFilterChain - URL ?洹?沅? ?ㅼ</td>
+ *     <td>SecurityFilterChain - URL 접근 권한 설정</td>
  *   </tr>
  * </table>
  *
- * <h3>4. swagger - API 臾몄? ?ㅼ</h3>
+ * <h3>4. swagger - API 문서 설정</h3>
  * <table border="1">
- *   <tr><th>?대??/th><th>鍮 ?대?</th><th>??</th></tr>
+ *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
  *     <td>{@link egovframework.config.swagger.SwaggerConfig}</td>
  *     <td>openAPI</td>
- *     <td>OpenAPI 3.0 臾몄 ?ㅼ (Swagger UI)</td>
+ *     <td>OpenAPI 3.0 문서 설정 (Swagger UI)</td>
  *   </tr>
  * </table>
- * <p>?洹?URL: {@code /swagger-ui/index.html}</p>
+ * <p>접근 URL: {@code /swagger-ui/index.html}</p>
  *
- * <h3>5. transaction - ?몃?? ?ㅼ</h3>
+ * <h3>5. transaction - 트랜잭션 설정</h3>
  * <table border="1">
- *   <tr><th>?대??/th><th>鍮 ?대?</th><th>??</th></tr>
+ *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
  *     <td>{@link egovframework.config.transaction.EgovConfigTransaction}</td>
  *     <td>basicTransaction</td>
- *     <td>DataSourceTransactionManager - @Transactional 吏?</td>
+ *     <td>DataSourceTransactionManager - @Transactional 지원</td>
  *   </tr>
  * </table>
  *
- * <h2>鍮 ?議댁??由</h2>
+ * <h2>Bean 의존성 흐름</h2>
  * <pre>
- * ???????????????????????????????????????????????????????????????????
- * ?                      application.properties                     ?
- * ?                              ?                                  ?
- * ?                              ??                                 ?
- * ?                 ???????????????????????????                     ?
- * ?                 ? BasicDataBaseProperties ?                     ?
- * ?                 ? (DB ?곌껐 ?蹂?諛?몃?     ?                     ?
- * ?                 ??????????????р????????????                     ?
- * ?                              ?                                  ?
- * ?                              ??                                 ?
- * ?              ?????????????????????????????????                  ?
- * ?              ? ApplicationConfigDatasource   ?                  ?
- * ?              ? (DataSource: basicDataSource) ?                  ?
- * ?              ?????????????????р???????????????                  ?
- * ?                              ?                                  ?
- * ?              ?????????????????쇄???????????????                  ?
- * ?              ??                              ??                 ?
- * ?   ???????????????????????       ???????????????????????????     ?
- * ?   ? BasicDBConfigMapper ?       ? EgovConfigTransaction   ?     ?
- * ?   ? ??????????????????? ?       ? ??????????????????????? ?     ?
- * ?   ? ??basicSqlSession   ?       ? ??basicTransaction      ?     ?
- * ?   ? ??basicSqlSession   ?       ?   (TransactionManager)  ?     ?
- * ?   ?   Template          ?       ???????????????????????????     ?
- * ?   ???????????????????????                                       ?
- * ?                                                                 ?
- * ?   ???????????????????????       ???????????????????????????     ?
- * ?   ? SecurityConfig      ?       ? SwaggerConfig           ?     ?
- * ?   ? ??????????????????? ?       ? ??????????????????????? ?     ?
- * ?   ? ??passwordEncoder   ?       ? ??openAPI               ?     ?
- * ?   ? ??filterChain       ?       ?   (API 臾몄)             ?     ?
- * ?   ???????????????????????       ???????????????????????????     ?
- * ???????????????????????????????????????????????????????????????????
+ * application.properties
+ *         │
+ *         ▼
+ * BasicDataBaseProperties (DB 접속 정보 바인딩)
+ *         │
+ *         ▼
+ * ApplicationConfigDatasource (DataSource: basicDataSource)
+ *         │
+ *    ┌────┴────┐
+ *    ▼         ▼
+ * BasicDBConfigMapper    EgovConfigTransaction
+ * - basicSqlSession      - basicTransaction
+ * - basicSqlSessionTemplate
+ *
+ * SecurityConfig         SwaggerConfig
+ * - passwordEncoder      - openAPI
+ * - filterChain
  * </pre>
  *
- * <h2>?洹 DB 異媛 ? ?? ?? ???/h2>
+ * <h2>신규 DB 추가 시 수정 필요 파일</h2>
  * <ol>
- *   <li>{@code application.properties} - ?洹 DB ?곌껐 ?蹂?異媛</li>
- *   <li>{@link egovframework.common.constants.BeanNames} - 鍮 ?대? ?? 異媛</li>
- *   <li>{@code database/propertiesObject/} - ?洹 Properties ?대?????/li>
- *   <li>{@link egovframework.config.database.ApplicationConfigDatasource} - ?洹 DataSource 鍮 異媛</li>
- *   <li>{@code mybatis/} - ?洹 Mapper ?ㅼ ?대?????/li>
- *   <li>{@link egovframework.config.transaction.EgovConfigTransaction} - ?洹 TransactionManager 鍮 異媛</li>
+ *   <li>{@code application.properties} - 신규 DB 접속 정보 추가</li>
+ *   <li>{@link egovframework.common.constants.BeanNames} - Bean 이름 상수 추가</li>
+ *   <li>{@code database/propertiesObject/} - 신규 Properties 클래스 생성</li>
+ *   <li>{@link egovframework.config.database.ApplicationConfigDatasource} - 신규 DataSource Bean 추가</li>
+ *   <li>{@code mybatis/} - 신규 Mapper 설정 클래스 생성</li>
+ *   <li>{@link egovframework.config.transaction.EgovConfigTransaction} - 신규 TransactionManager Bean 추가</li>
  * </ol>
  *
- * @see egovframework.common.constants.BeanNames 鍮 ?대? ??
+ * @see egovframework.common.constants.BeanNames Bean 이름 상수
  */
 package egovframework.config;
