@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>egovframework.com</groupId>
-	<artifactId>krsiapplication</artifactId>
+	<artifactId>eGovapplication</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
-	<name>krsiapplication</name>
+	<name>Egovapplication</name>
 	<url>https://www.egovframe.go.kr</url>
 
 	<licenses>
