@@ -111,7 +111,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class EgovConfigTransaction {
 
     /**
-     * 트랜잭션 매니저 빈 설정
+     * 트랜잭션 매니저 빈 설정 - 기본 DataSource용
      *
      * @param dataSource 데이터소스
      * @return PlatformTransactionManager
@@ -119,6 +119,18 @@ public class EgovConfigTransaction {
     @Bean(name = BeanNames.Basic_Transaction)
     public PlatformTransactionManager basicTransactionManager(
             @Qualifier(BeanNames.BASIC_DATASOURCE) DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+
+    /**
+     * 트랜잭션 매니저 빈 설정 - Second DataSource용
+     *
+     * @param dataSource 데이터소스
+     * @return PlatformTransactionManager
+     */
+    @Bean(name = BeanNames.Second_Transaction)
+    public PlatformTransactionManager secondTransactionManager(
+            @Qualifier(BeanNames.SECOND_DATASOURCE) DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
