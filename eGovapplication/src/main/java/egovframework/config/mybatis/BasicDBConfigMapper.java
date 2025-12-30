@@ -1,8 +1,8 @@
 package egovframework.config.mybatis;
 
 import egovframework.common.constants.BeanNames;
-import egovframework.config.database.ApplicationConfigDatasource;
-import egovframework.config.transaction.EgovConfigTransaction;
+import egovframework.config.database.ApplicationDatasourceConfig;
+import egovframework.config.transaction.TransactionConfig;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -118,8 +118,8 @@ import java.io.IOException;
  *   <li>Mapper 패키지를 분리하여 어떤 DB를 사용하는지 명확히 구분</li>
  * </ul>
  *
- * @see ApplicationConfigDatasource DataSource 설정
- * @see EgovConfigTransaction 트랜잭션 설정
+ * @see ApplicationDatasourceConfig DataSource 설정
+ * @see TransactionConfig 트랜잭션 설정
  * @see BeanNames 빈 이름 상수
  */
 @Configuration

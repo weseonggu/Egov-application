@@ -5,7 +5,7 @@
  * <pre>
  * config/
  * ├── database/                    - DataSource 설정
- * │   ├── ApplicationConfigDatasource.java
+ * │   ├── ApplicationDatasourceConfig.java
  * │   └── propertiesObject/        - DB 접속 정보 클래스
  * │       ├── DataBaseProperties.java
  * │       └── BasicDataBaseProperties.java
@@ -16,7 +16,7 @@
  * ├── swagger/                     - OpenAPI/Swagger 설정
  * │   └── SwaggerConfig.java
  * └── transaction/                 - 트랜잭션 설정
- *     └── EgovConfigTransaction.java
+ *     └── TransactionConfig.java
  * </pre>
  *
  * <h2>주요 패키지 설명</h2>
@@ -25,7 +25,7 @@
  * <table border="1">
  *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
- *     <td>{@link egovframework.config.database.ApplicationConfigDatasource}</td>
+ *     <td>{@link egovframework.config.database.ApplicationDatasourceConfig}</td>
  *     <td>basicDataSource</td>
  *     <td>HikariCP 기반 DataSource 생성</td>
  *   </tr>
@@ -80,7 +80,7 @@
  * <table border="1">
  *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
- *     <td>{@link egovframework.config.transaction.EgovConfigTransaction}</td>
+ *     <td>{@link egovframework.config.transaction.TransactionConfig}</td>
  *     <td>basicTransaction</td>
  *     <td>DataSourceTransactionManager - @Transactional 지원</td>
  *   </tr>
@@ -94,11 +94,11 @@
  * BasicDataBaseProperties (DB 접속 정보 바인딩)
  *         │
  *         ▼
- * ApplicationConfigDatasource (DataSource: basicDataSource)
+ * ApplicationDatasourceConfig (DataSource: basicDataSource)
  *         │
  *    ┌────┴────┐
  *    ▼         ▼
- * BasicDBConfigMapper    EgovConfigTransaction
+ * BasicDBConfigMapper    TransactionConfig
  * - basicSqlSession      - basicTransaction
  * - basicSqlSessionTemplate
  *
@@ -112,9 +112,9 @@
  *   <li>{@code application.properties} - 신규 DB 접속 정보 추가</li>
  *   <li>{@link egovframework.common.constants.BeanNames} - Bean 이름 상수 추가</li>
  *   <li>{@code database/propertiesObject/} - 신규 Properties 클래스 생성</li>
- *   <li>{@link egovframework.config.database.ApplicationConfigDatasource} - 신규 DataSource Bean 추가</li>
+ *   <li>{@link egovframework.config.database.ApplicationDatasourceConfig} - 신규 DataSource Bean 추가</li>
  *   <li>{@code mybatis/} - 신규 Mapper 설정 클래스 생성</li>
- *   <li>{@link egovframework.config.transaction.EgovConfigTransaction} - 신규 TransactionManager Bean 추가</li>
+ *   <li>{@link egovframework.config.transaction.TransactionConfig} - 신규 TransactionManager Bean 추가</li>
  * </ol>
  *
  * @see egovframework.common.constants.BeanNames Bean 이름 상수

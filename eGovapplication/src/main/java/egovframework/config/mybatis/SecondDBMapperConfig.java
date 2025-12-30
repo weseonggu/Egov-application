@@ -1,8 +1,8 @@
 package egovframework.config.mybatis;
 
 import egovframework.common.constants.BeanNames;
-import egovframework.config.database.ApplicationConfigDatasource;
-import egovframework.config.transaction.EgovConfigTransaction;
+import egovframework.config.database.ApplicationDatasourceConfig;
+import egovframework.config.transaction.TransactionConfig;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -43,8 +43,8 @@ import java.io.IOException;
  *   <li>Mapper 패키지를 분리하여 어떤 DB를 사용하는지 명확히 구분</li>
  * </ul>
  *
- * @see ApplicationConfigDatasource DataSource 설정
- * @see EgovConfigTransaction 트랜잭션 설정
+ * @see ApplicationDatasourceConfig DataSource 설정
+ * @see TransactionConfig 트랜잭션 설정
  * @see BeanNames 빈 이름 상수
  */
 @Configuration
@@ -52,7 +52,7 @@ import java.io.IOException;
     basePackages = "egovframework.mapper.second",
     sqlSessionFactoryRef = BeanNames.Second_Sql_Session
 )
-public class SecondDBConfigMapper {
+public class SecondDBMapperConfig {
 
     /**
      * SqlSessionFactory 빈 설정
@@ -69,12 +69,12 @@ public class SecondDBConfigMapper {
 
         // MyBatis 설정 파일
         sqlSessionFactoryBean.setConfigLocation(
-            pmrpr.getResource("classpath:/egovframework/sqlmap/second/mybatis-config.xml")
+            pmrpr.getResource("classpath:/egovframework/sqlmap/mybatis-config.xml")
         );
 
         // Mapper XML 위치 - 하위 폴더 전체 스캔
         sqlSessionFactoryBean.setMapperLocations(
-            pmrpr.getResources("classpath:/egovframework/sqlmap/second/mappers/**/*.xml")
+            pmrpr.getResources("classpath:/egovframework/sqlmap/mappers/**/*.xml")
         );
 
         return sqlSessionFactoryBean;

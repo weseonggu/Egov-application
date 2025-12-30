@@ -6,6 +6,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import egovframework.common.constants.BeanNames;
 import egovframework.config.database.propertiesObject.DataBaseProperties;
+import egovframework.config.transaction.TransactionConfig;
+import egovframework.config.mybatis.BasicDBConfigMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,24 @@ import org.springframework.context.annotation.Primary;
  *
  * <h2>사용방법</h2>
  * <p>application.properties의 설정값을 로딩하여 HikariCP DataSource를 생성합니다.</p>
+ *
+ * <h2>설정 클래스 간 의존 관계</h2>
+ * <pre>
+ * ┌──────────────────────────────────────┐
+ * │  ApplicationDatasourceConfig (1단계) │ ← 현재 클래스: DataSource 생성
+ * └─────────────────┬────────────────────┘
+ *                   │
+ *          +────────+────────+
+ *          ↓                 ↓
+ * ┌─────────────────┐  ┌─────────────────┐
+ * │ BasicDBConfig   │  │ TransactionConfig│
+ * │ Mapper (2단계)  │  │ (2단계)         │
+ * │                 │  │                 │
+ * │ - SqlSession    │  │ - Transaction   │
+ * │   Factory       │  │   Manager       │
+ * │ - MapperScan    │  │                 │
+ * └─────────────────┘  └─────────────────┘
+ * </pre>
  *
  * <h2>신규 DataSource 추가 방법</h2>
  * <ol>
@@ -49,10 +69,13 @@ import org.springframework.context.annotation.Primary;
  *     <pre>
  * public static final String SECONDARY_DATABASE_PROPERTIES = "secondaryDatabaseProperties";
  * public static final String SECONDARY_DATASOURCE = "secondaryDataSource";
+ * public static final String SECONDARY_TRANSACTION = "secondaryTransaction";
+ * public static final String Secondary_Sql_Session = "secondarySqlSession";
+ * public static final String Secondary_Sql_Session_Template = "secondarySqlSessionTemplate";
  *     </pre>
  *   </li>
  *   <li>
- *     <b>4단계: DataSource Bean 추가</b>
+ *     <b>4단계: DataSource Bean 추가 (이 클래스)</b>
  *     <pre>
  * {@literal @}Bean(name = BeanNames.SECONDARY_DATASOURCE)
  * public DataSource secondaryDataSource(
@@ -62,7 +85,38 @@ import org.springframework.context.annotation.Primary;
  * }
  *     </pre>
  *   </li>
+ *   <li>
+ *     <b>5단계: MyBatis 설정 추가</b>
+ *     <p>{@link BasicDBConfigMapper}를 참고하여 새 Mapper 설정 클래스 생성</p>
+ *     <pre>
+ * {@literal @}Configuration
+ * {@literal @}MapperScan(
+ *     basePackages = "egovframework.mapper.secondary",
+ *     sqlSessionFactoryRef = BeanNames.Secondary_Sql_Session
+ * )
+ * public class SecondaryDBConfigMapper {
+ *     // SqlSessionFactory, SqlSessionTemplate 빈 정의
+ * }
+ *     </pre>
+ *   </li>
+ *   <li>
+ *     <b>6단계: 트랜잭션 매니저 추가</b>
+ *     <p>{@link TransactionConfig}에 새 DataSource용 TransactionManager 추가</p>
+ *     <pre>
+ * {@literal @}Bean(name = BeanNames.SECONDARY_TRANSACTION)
+ * public PlatformTransactionManager secondaryTransactionManager(
+ *         {@literal @}Qualifier(BeanNames.SECONDARY_DATASOURCE) DataSource dataSource) {
+ *     return new DataSourceTransactionManager(dataSource);
+ * }
+ *     </pre>
+ *   </li>
  * </ol>
+ *
+ * <h2>중요: 1:1:1 관계 유지</h2>
+ * <pre>
+ * DataSource : SqlSessionFactory : MapperScan = 1:1:1
+ * DataSource : TransactionManager = 1:1
+ * </pre>
  *
  * <h2>HikariCP 주요 설정</h2>
  * <ul>
@@ -73,16 +127,18 @@ import org.springframework.context.annotation.Primary;
  *   <li>maxLifetime: 커넥션 최대 수명 (ms)</li>
  * </ul>
  *
- * @see DataBaseProperties
- * @see BeanNames
+ * @see TransactionConfig 트랜잭션 매니저 설정
+ * @see BasicDBConfigMapper MyBatis SqlSession 설정
+ * @see DataBaseProperties 데이터베이스 연결 정보 인터페이스
+ * @see BeanNames 빈 이름 상수
  */
 @Configuration(BeanNames.Application_Config_Datasource)
-public class ApplicationConfigDatasource {
+public class ApplicationDatasourceConfig {
 
     private final DataBaseProperties basicDataBaseProperties;
     private final DataBaseProperties secondDataBaseProperties;
 
-    public ApplicationConfigDatasource(
+    public ApplicationDatasourceConfig(
             @Qualifier(BeanNames.BASIC_DATABASE_PROPERTIES) DataBaseProperties basicDataBaseProperties,
             @Qualifier(BeanNames.SECOND_DATABASE_PROPERTIES) DataBaseProperties secondDataBaseProperties
     ) {

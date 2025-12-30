@@ -3,7 +3,7 @@ package egovframework.config.transaction;
 import javax.sql.DataSource;
 
 import egovframework.common.constants.BeanNames;
-import egovframework.config.database.ApplicationConfigDatasource;
+import egovframework.config.database.ApplicationDatasourceConfig;
 import egovframework.config.mybatis.BasicDBConfigMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -86,7 +86,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * <h2>설정 클래스간 관계</h2>
  * <pre>
  * +----------------------------------+
- * |  ApplicationConfigDatasource    | <- DataSource 생성
+ * |  ApplicationDatasourceConfig    | <- DataSource 생성
  * |  (1단계)                        |
  * +----------------+-----------------+
  *                  |
@@ -102,13 +102,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * +----------------+  +---------------------+
  * </pre>
  *
- * @see ApplicationConfigDatasource DataSource 설정
+ * @see ApplicationDatasourceConfig DataSource 설정
  * @see BasicDBConfigMapper MyBatis 설정
  * @see BeanNames 빈 이름 상수
  */
 @Configuration
 @EnableTransactionManagement
-public class EgovConfigTransaction {
+public class TransactionConfig {
 
     /**
      * 트랜잭션 매니저 빈 설정 - 기본 DataSource용
