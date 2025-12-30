@@ -80,11 +80,14 @@ import org.springframework.context.annotation.Primary;
 public class ApplicationConfigDatasource {
 
     private final DataBaseProperties basicDataBaseProperties;
+    private final DataBaseProperties secondaryDataBaseProperties;
 
     public ApplicationConfigDatasource(
-            @Qualifier(BeanNames.BASIC_DATABASE_PROPERTIES) DataBaseProperties basicDataBaseProperties
+            @Qualifier(BeanNames.BASIC_DATABASE_PROPERTIES) DataBaseProperties basicDataBaseProperties,
+            @Qualifier(BeanNames.SECONDARY_DATABASE_PROPERTIES) DataBaseProperties secondaryDataBaseProperties
     ) {
         this.basicDataBaseProperties = basicDataBaseProperties;
+        this.secondaryDataBaseProperties = secondaryDataBaseProperties;
     }
 
     /**
@@ -96,6 +99,16 @@ public class ApplicationConfigDatasource {
     @Bean(name = BeanNames.BASIC_DATASOURCE)
     public DataSource dataSource() {
         return createHikariDataSource(basicDataBaseProperties);
+    }
+
+    /**
+     * 보조 Oracle DataSource 생성
+     *
+     * @return HikariCP 기반 DataSource
+     */
+    @Bean(name = BeanNames.SECONDARY_DATASOURCE)
+    public DataSource secondaryDataSource() {
+        return createHikariDataSource(secondaryDataBaseProperties);
     }
 
     /**
