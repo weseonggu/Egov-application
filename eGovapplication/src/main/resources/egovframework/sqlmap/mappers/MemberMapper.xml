@@ -3,6 +3,11 @@
 
 <mapper namespace="egovframework.mapper.member.MemberSignupMapper">
 
+    <!-- DB 연결 테스트 -->
+    <select id="testConnection" resultType="int">
+        SELECT 1 FROM DUAL
+    </select>
+
     <!-- 결과 매핑 -->
     <resultMap id="memberResultMap" type="MemberVO">
         <id property="memberId" column="MEMBER_ID"/>
