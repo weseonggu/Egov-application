@@ -19,11 +19,13 @@ public final class BeanNames {
     // Database Properties
     // ============================================
     public static final String BASIC_DATABASE_PROPERTIES = "basicDatabaseProperties";
+    public static final String SECONDARY_DATABASE_PROPERTIES = "secondaryDatabaseProperties";
 
     // ============================================
     // DataSource
     // ============================================
     public static final String BASIC_DATASOURCE = "basicDataSource";
+    public static final String SECONDARY_DATASOURCE = "secondaryDataSource";
 
     public static final String Application_Config_Datasource = "applicationConfigDatasource";
     public static final String Basic_Sql_Session = "basicSqlSession";
