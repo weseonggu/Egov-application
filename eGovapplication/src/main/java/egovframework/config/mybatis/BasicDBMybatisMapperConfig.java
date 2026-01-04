@@ -20,19 +20,23 @@ import java.io.IOException;
  *
  * <h2>Mapper 인터페이스 관리 정책</h2>
  * <ul>
- *   <li>모든 Mapper 인터페이스는 {@code egovframework.mapper} 패키지 하위에 집중 관리</li>
- *   <li>도메인별로 하위 패키지 구성: mapper.member, mapper.product 등</li>
+ *   <li>모든 Mapper 인터페이스는 {@code egovframework.repository.mapper} 패키지 하위에 집중 관리</li>
+ *   <li>도메인별로 하위 패키지 구성: repository.mapper.member, repository.mapper.product 등</li>
  *   <li>전자정부 프레임워크 표준 {@code @EgovMapper} 어노테이션 사용</li>
  * </ul>
  *
  * <h2>패키지 구조</h2>
  * <pre>
  * egovframework/
- * +-- mapper/                    <- Mapper 인터페이스 집중 관리
- * |   +-- member/
- * |   |   +-- MemberSignupMapper.java
- * |   +-- product/
- * |       +-- ProductMapper.java
+ * +-- repository/                <- 데이터 접근 계층 집중 관리
+ * |   +-- mapper/                <- MyBatis Mapper 인터페이스
+ * |   |   +-- member/
+ * |   |   |   +-- MemberSignupMapper.java
+ * |   |   +-- product/
+ * |   |       +-- ProductMapper.java
+ * |   +-- jpa/                   <- JPA Repository + Entity
+ * |       +-- SampleEntity.java
+ * |       +-- SampleRepository.java
  * +-- member/                    <- 도메인별 비즈니스 로직
  * |   +-- signup/
  * |       +-- controller/
@@ -55,7 +59,7 @@ import java.io.IOException;
  * <pre>
  * // 다중 DataSource 환경에서 필수 설정
  * {@literal @}MapperScan(
- *     basePackages = "egovframework.mapper",
+ *     basePackages = "egovframework.repository.mapper",
  *     sqlSessionFactoryRef = BeanNames.Basic_Sql_Session  // 필수!
  * )
  * </pre>
@@ -63,7 +67,7 @@ import java.io.IOException;
  * <h3>에러 발생 케이스</h3>
  * <pre>
  * // ❌ sqlSessionFactoryRef 미지정 시 에러 발생
- * {@literal @}MapperScan(basePackages = "egovframework.mapper")
+ * {@literal @}MapperScan(basePackages = "egovframework.repository.mapper")
  *
  * // 에러 메시지:
  * // NoUniqueBeanDefinitionException: expected single matching bean
@@ -95,7 +99,7 @@ import java.io.IOException;
  *     <pre>
  * {@literal @}Configuration
  * {@literal @}MapperScan(
- *     basePackages = "egovframework.mapper.secondary",  // 별도 패키지!
+ *     basePackages = "egovframework.repository.mapper.secondary",  // 별도 패키지!
  *     sqlSessionFactoryRef = BeanNames.SECONDARY_SQL_SESSION
  * )
  * public class SecondaryDBConfigMapper {
@@ -147,7 +151,7 @@ import java.io.IOException;
  *   <li>
  *     <b>4단계: Mapper 인터페이스 패키지 분리</b>
  *     <pre>
- * egovframework/mapper/
+ * egovframework/repository/mapper/
  * +-- member/                      <- 기본 DB용 (@MapperScan이 스캔)
  * |   +-- MemberSignupMapper.java
  * +-- secondary/                   <- 신규 DB용 (SecondaryDBConfigMapper가 스캔)
@@ -203,7 +207,7 @@ import java.io.IOException;
  */
 @Configuration
 @MapperScan(
-    basePackages = "egovframework.mapper",
+    basePackages = "egovframework.repository.mapper",
     sqlSessionFactoryRef = BeanNames.Basic_Sql_Session
 )
 public class BasicDBMybatisMapperConfig {

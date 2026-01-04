@@ -49,7 +49,7 @@ import java.io.IOException;
  */
 @Configuration
 @MapperScan(
-    basePackages = "egovframework.mapper.second",
+    basePackages = "egovframework.repository.mapper.second",
     sqlSessionFactoryRef = BeanNames.Second_Sql_Session
 )
 public class SecondDBMybatisMapperConfig {

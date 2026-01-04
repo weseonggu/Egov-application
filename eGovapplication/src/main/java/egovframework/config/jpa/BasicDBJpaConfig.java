@@ -60,6 +60,30 @@ import java.util.HashMap;
         transactionManagerRef = BeanNames.Basic_Transaction
 )
 public class BasicDBJpaConfig {
+
+    /**
+     * 기본 데이터베이스용 EntityManagerFactory 빈 생성.
+     *
+     * <p>JPA Entity 관리를 위한 EntityManagerFactory를 구성합니다.
+     * Hibernate를 JPA 구현체로 사용하며, 개발 환경에 맞는 설정이 적용되어 있습니다.</p>
+     *
+     * <h3>Hibernate 설정 옵션</h3>
+     * <table border="1">
+     *   <tr><th>속성</th><th>값</th><th>설명</th></tr>
+     *   <tr><td>hibernate.hbm2ddl.auto</td><td>update</td><td>Entity 변경 시 테이블 자동 업데이트 (운영환경에서는 validate 또는 none 권장)</td></tr>
+     *   <tr><td>hibernate.show_sql</td><td>true</td><td>실행되는 SQL 콘솔 출력</td></tr>
+     *   <tr><td>hibernate.format_sql</td><td>true</td><td>SQL 포맷팅하여 출력</td></tr>
+     * </table>
+     *
+     * <h3>운영환경 설정 권장사항</h3>
+     * <pre>{@code
+     * properties.put("hibernate.hbm2ddl.auto", "validate"); // 또는 "none"
+     * properties.put("hibernate.show_sql", "false");
+     * }</pre>
+     *
+     * @param dataSource 기본 데이터소스 (BeanNames.BASIC_DATASOURCE)
+     * @return EntityManagerFactory 빈
+     */
     @Bean(name = "BasicDBJPAManager")
     public LocalContainerEntityManagerFactoryBean dataEntityManager(
             @Qualifier(BeanNames.BASIC_DATASOURCE) DataSource dataSource) {
@@ -67,14 +91,14 @@ public class BasicDBJpaConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
         em.setDataSource(dataSource);
-        em.setPackagesToScan("egovframework.repository.jpa"); // jpa 엔티티 패키지
+        em.setPackagesToScan("egovframework.repository.jpa"); // JPA Entity 패키지
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        
-        // 추가 jpa설덩 테이블 정보 업데이트 쿼리 출력 등등
+
+        // Hibernate JPA 설정
         HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
-        properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "update");   // Entity 변경 시 테이블 자동 업데이트
+        properties.put("hibernate.show_sql", "true");         // SQL 출력
+        properties.put("hibernate.format_sql", "true");       // SQL 포맷팅
         em.setJpaPropertyMap(properties);
 
         return em;

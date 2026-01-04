@@ -1,11 +1,13 @@
 egovframework
 egovframework.common.constants
+egovframework.common.security
 egovframework.config
 egovframework.config.database
 egovframework.config.database.propertiesObject
+egovframework.config.jpa
 egovframework.config.mybatis
 egovframework.config.security
 egovframework.config.swagger
 egovframework.config.transaction
-egovframework.mapper.member
 egovframework.member.signup.dto
+egovframework.repository.mapper.member
