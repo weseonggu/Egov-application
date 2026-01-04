@@ -1,5 +1,6 @@
-package egovframework.member.signup.dto;
+package egovframework.member.signup.dao;
 
+import egovframework.member.signup.dto.MemberSignupRequestDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package egovframework.mapper.member;
 
-import egovframework.member.signup.dto.MemberVO;
+import egovframework.member.signup.dao.MemberVO;
 import egovframework.repository.mapper.member.MemberSignupMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
