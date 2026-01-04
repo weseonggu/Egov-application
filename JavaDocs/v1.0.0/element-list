@@ -9,5 +9,7 @@ egovframework.config.mybatis
 egovframework.config.security
 egovframework.config.swagger
 egovframework.config.transaction
+egovframework.member.signup.dao
 egovframework.member.signup.dto
+egovframework.repository.jpa
 egovframework.repository.mapper.member
