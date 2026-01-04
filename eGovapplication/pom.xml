@@ -27,6 +27,7 @@
 		<java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <egovframe.rte.version>5.0.0</egovframe.rte.version>
     </properties>
 
 	<repositories>
@@ -74,6 +75,16 @@
 			<groupId>org.egovframe.rte</groupId>
 			<artifactId>egovframe-rte-ptl-reactive</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.egovframe.rte</groupId>
+            <artifactId>egovframe-rte-fdl-crypto</artifactId>
+            <version>${egovframe.rte.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.egovframe.rte</groupId>
+            <artifactId>egovframe-rte-fdl-security</artifactId>
+            <version>${egovframe.rte.version}</version>
+        </dependency>
 		<!-- 실행환경 라이브러리 끝 -->
 
 		<dependency>
@@ -86,6 +97,8 @@
 	            </exclusion>
 			</exclusions>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -100,7 +113,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<!-- Swagger / OpenAPI 3.0 -->
@@ -136,11 +149,11 @@
 		</dependency>
 		-->
 
-		<!-- HikariCP - 고성능 커넥션 풀 (Spring Boot 3.x 기본 포함) -->
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-		</dependency>
+		<!-- HikariCP - 고성능 커넥션 풀 -->
+<!--		<dependency>-->
+<!--			<groupId>com.zaxxer</groupId>-->
+<!--			<artifactId>HikariCP</artifactId>-->
+<!--		</dependency>-->
 <!--		<dependency>-->
 <!--			<groupId>org.hsqldb</groupId>-->
 <!--			<artifactId>hsqldb</artifactId>-->
