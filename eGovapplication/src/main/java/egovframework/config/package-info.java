@@ -10,7 +10,7 @@
  * │       ├── DataBaseProperties.java
  * │       └── BasicDataBaseProperties.java
  * ├── mybatis/                     - MyBatis 설정
- * │   └── BasicDBConfigMapper.java
+ * │   └── BasicDBMybatisMapperConfig.java
  * ├── security/                    - Spring Security 설정
  * │   └── SecurityConfig.java
  * ├── swagger/                     - OpenAPI/Swagger 설정
@@ -40,7 +40,7 @@
  * <table border="1">
  *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
- *     <td rowspan="2">{@link egovframework.config.mybatis.BasicDBConfigMapper}</td>
+ *     <td rowspan="2">{@link egovframework.config.mybatis.BasicDBMybatisMapperConfig}</td>
  *     <td>basicSqlSession</td>
  *     <td>SqlSessionFactory - MyBatis 설정 및 Mapper XML 로드</td>
  *   </tr>
@@ -98,7 +98,7 @@
  *         │
  *    ┌────┴────┐
  *    ▼         ▼
- * BasicDBConfigMapper    TransactionConfig
+ * BasicDBMybatisMapperConfig    TransactionConfig
  * - basicSqlSession      - basicTransaction
  * - basicSqlSessionTemplate
  *

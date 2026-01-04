@@ -52,7 +52,7 @@ import java.io.IOException;
     basePackages = "egovframework.mapper.second",
     sqlSessionFactoryRef = BeanNames.Second_Sql_Session
 )
-public class SecondDBMapperConfig {
+public class SecondDBMybatisMapperConfig {
 
     /**
      * SqlSessionFactory 빈 설정

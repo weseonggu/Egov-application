@@ -1,16 +1,16 @@
 package egovframework.config.transaction;
 
-import javax.sql.DataSource;
-
 import egovframework.common.constants.BeanNames;
 import egovframework.config.database.ApplicationDatasourceConfig;
-import egovframework.config.mybatis.BasicDBConfigMapper;
+import egovframework.config.mybatis.BasicDBMybatisMapperConfig;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
 
 /**
  * 트랜잭션 설정 - 기본 DataSource용
@@ -103,7 +103,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * </pre>
  *
  * @see ApplicationDatasourceConfig DataSource 설정
- * @see BasicDBConfigMapper MyBatis 설정
+ * @see BasicDBMybatisMapperConfig MyBatis 설정
  * @see BeanNames 빈 이름 상수
  */
 @Configuration

@@ -1,7 +1,7 @@
 package egovframework.config;
 
 import egovframework.common.constants.BeanNames;
-import egovframework.mapper.member.MemberSignupMapper;
+import egovframework.repository.member.MemberSignupMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.*;
 import org.mybatis.spring.SqlSessionTemplate;

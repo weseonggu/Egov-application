@@ -198,7 +198,7 @@ import java.io.IOException;
  *
  * @see ApplicationDatasourceConfig DataSource 설정
  * @see TransactionConfig 트랜잭션 설정
- * @see SecondDBMapperConfig Second DataSource용 MyBatis 설정
+ * @see SecondDBMybatisMapperConfig Second DataSource용 MyBatis 설정
  * @see BeanNames 빈 이름 상수
  */
 @Configuration
@@ -206,7 +206,7 @@ import java.io.IOException;
     basePackages = "egovframework.mapper",
     sqlSessionFactoryRef = BeanNames.Basic_Sql_Session
 )
-public class BasicDBConfigMapper {
+public class BasicDBMybatisMapperConfig {
 
     /**
      * SqlSessionFactory 빈 설정

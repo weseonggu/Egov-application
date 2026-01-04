@@ -1,4 +1,4 @@
-package egovframework.mapper.member;
+package egovframework.repository.member;
 
 import egovframework.member.signup.dto.MemberVO;
 import org.apache.ibatis.annotations.Param;

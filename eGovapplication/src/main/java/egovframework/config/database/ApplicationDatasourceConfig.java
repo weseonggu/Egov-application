@@ -6,8 +6,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import egovframework.common.constants.BeanNames;
 import egovframework.config.database.propertiesObject.DataBaseProperties;
+import egovframework.config.mybatis.BasicDBMybatisMapperConfig;
 import egovframework.config.transaction.TransactionConfig;
-import egovframework.config.mybatis.BasicDBConfigMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -87,7 +87,7 @@ import org.springframework.context.annotation.Primary;
  *   </li>
  *   <li>
  *     <b>5단계: MyBatis 설정 추가</b>
- *     <p>{@link BasicDBConfigMapper}를 참고하여 새 Mapper 설정 클래스 생성</p>
+ *     <p>{@link BasicDBMybatisMapperConfig}를 참고하여 새 Mapper 설정 클래스 생성</p>
  *     <pre>
  * {@literal @}Configuration
  * {@literal @}MapperScan(
@@ -128,7 +128,7 @@ import org.springframework.context.annotation.Primary;
  * </ul>
  *
  * @see TransactionConfig 트랜잭션 매니저 설정
- * @see BasicDBConfigMapper MyBatis SqlSession 설정
+ * @see BasicDBMybatisMapperConfig MyBatis SqlSession 설정
  * @see DataBaseProperties 데이터베이스 연결 정보 인터페이스
  * @see BeanNames 빈 이름 상수
  */
