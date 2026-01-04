@@ -3,10 +3,12 @@ package egovframework.config.transaction;
 import egovframework.common.constants.BeanNames;
 import egovframework.config.database.ApplicationDatasourceConfig;
 import egovframework.config.mybatis.BasicDBMybatisMapperConfig;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -111,15 +113,21 @@ import javax.sql.DataSource;
 public class TransactionConfig {
 
     /**
-     * 트랜잭션 매니저 빈 설정 - 기본 DataSource용
+     * 트랜잭션 매니저 빈 설정 - 기본 DataSource용 (JPA + MyBatis 공용)
      *
-     * @param dataSource 데이터소스
+     * <p>JpaTransactionManager는 JPA와 MyBatis 모두 지원합니다.</p>
+     * <ul>
+     *   <li>JPA: EntityManager의 영속성 컨텍스트 관리 + flush/commit</li>
+     *   <li>MyBatis: 동일 DataSource의 Connection 공유로 트랜잭션 참여</li>
+     * </ul>
+     *
+     * @param entityManagerFactory JPA EntityManagerFactory
      * @return PlatformTransactionManager
      */
     @Bean(name = BeanNames.Basic_Transaction)
     public PlatformTransactionManager basicTransactionManager(
-            @Qualifier(BeanNames.BASIC_DATASOURCE) DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
+            @Qualifier("BasicDBJPAManager") EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
     /**
