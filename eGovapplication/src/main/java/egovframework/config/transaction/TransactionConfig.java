@@ -7,12 +7,9 @@ import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import javax.sql.DataSource;
 
 /**
  * 트랜잭션 설정 - JPA + MyBatis 공용
@@ -164,18 +161,6 @@ public class TransactionConfig {
     public PlatformTransactionManager basicTransactionManager(
             @Qualifier("BasicDBJPAManager") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
-    }
-
-    /**
-     * 트랜잭션 매니저 빈 설정 - Second DataSource용
-     *
-     * @param dataSource 데이터소스
-     * @return PlatformTransactionManager
-     */
-    @Bean(name = BeanNames.Second_Transaction)
-    public PlatformTransactionManager secondTransactionManager(
-            @Qualifier(BeanNames.SECOND_DATASOURCE) DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
     }
 
 }

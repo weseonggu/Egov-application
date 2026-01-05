@@ -95,17 +95,16 @@
  * <table border="1">
  *   <tr><th>클래스</th><th>Bean 이름</th><th>설명</th></tr>
  *   <tr>
- *     <td rowspan="2">{@link egovframework.config.transaction.TransactionConfig}</td>
+ *     <td>{@link egovframework.config.transaction.TransactionConfig}</td>
  *     <td>basicTransaction</td>
  *     <td>JpaTransactionManager - JPA + MyBatis 공용 (영속성 컨텍스트 관리)</td>
  *   </tr>
- *   <tr>
- *     <td>secondTransaction</td>
- *     <td>DataSourceTransactionManager - MyBatis 전용 (JPA 미사용 DB)</td>
- *   </tr>
  * </table>
- * <p><b>JPA 사용 DB</b>: JpaTransactionManager 사용 (JPA + MyBatis 모두 지원)</p>
- * <p><b>MyBatis만 사용 DB</b>: DataSourceTransactionManager 사용</p>
+ * <p><b>다중 DataSource 사용 시 트랜잭션 매니저 선택</b></p>
+ * <ul>
+ *   <li>JPA 사용 DB: JpaTransactionManager (JPA + MyBatis 모두 지원)</li>
+ *   <li>MyBatis만 사용 DB: DataSourceTransactionManager</li>
+ * </ul>
  *
  * <h2>Bean 의존성 흐름</h2>
  * <pre>

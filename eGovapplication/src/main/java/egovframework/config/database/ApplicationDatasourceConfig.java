@@ -136,14 +136,11 @@ import org.springframework.context.annotation.Primary;
 public class ApplicationDatasourceConfig {
 
     private final DataBaseProperties basicDataBaseProperties;
-    private final DataBaseProperties secondDataBaseProperties;
 
     public ApplicationDatasourceConfig(
-            @Qualifier(BeanNames.BASIC_DATABASE_PROPERTIES) DataBaseProperties basicDataBaseProperties,
-            @Qualifier(BeanNames.SECOND_DATABASE_PROPERTIES) DataBaseProperties secondDataBaseProperties
+            @Qualifier(BeanNames.BASIC_DATABASE_PROPERTIES) DataBaseProperties basicDataBaseProperties
     ) {
         this.basicDataBaseProperties = basicDataBaseProperties;
-        this.secondDataBaseProperties = secondDataBaseProperties;
     }
 
     /**
@@ -155,16 +152,6 @@ public class ApplicationDatasourceConfig {
     @Bean(name = BeanNames.BASIC_DATASOURCE)
     public DataSource dataSource() {
         return createHikariDataSource(basicDataBaseProperties);
-    }
-
-    /**
-     * Second Oracle DataSource 생성
-     *
-     * @return HikariCP 기반 DataSource
-     */
-    @Bean(name = BeanNames.SECOND_DATASOURCE)
-    public DataSource secondDataSource() {
-        return createHikariDataSource(secondDataBaseProperties);
     }
 
     /**

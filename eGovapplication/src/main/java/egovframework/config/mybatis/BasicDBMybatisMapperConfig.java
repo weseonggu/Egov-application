@@ -202,7 +202,6 @@ import java.io.IOException;
  *
  * @see ApplicationDatasourceConfig DataSource 설정
  * @see TransactionConfig 트랜잭션 설정
- * @see SecondDBMybatisMapperConfig Second DataSource용 MyBatis 설정
  * @see BeanNames 빈 이름 상수
  */
 @Configuration
