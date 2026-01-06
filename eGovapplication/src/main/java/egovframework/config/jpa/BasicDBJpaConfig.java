@@ -17,14 +17,30 @@ import java.util.HashMap;
  * <p>Spring Data JPA를 사용하여 기본 데이터소스에 대한 JPA Repository를 구성합니다.
  * MyBatis와 함께 사용할 수 있으며, 동일한 트랜잭션 매니저를 공유합니다.</p>
  *
- * <h3>설정 항목</h3>
- * <ul>
- *   <li><b>basePackages</b>: JPA Repository 인터페이스 스캔 경로</li>
- *   <li><b>entityManagerFactoryRef</b>: EntityManagerFactory 빈 이름</li>
- *   <li><b>transactionManagerRef</b>: 트랜잭션 매니저 빈 이름 (MyBatis와 공유)</li>
- * </ul>
+ * <h2>스캔 대상 패키지</h2>
+ * <table border="1">
+ *   <tr><th>설정 항목</th><th>대상 패키지</th><th>설명</th></tr>
+ *   <tr>
+ *     <td>{@code basePackages}</td>
+ *     <td>{@code egovframework.repository.jpa}</td>
+ *     <td>JPA Repository 인터페이스 스캔</td>
+ *   </tr>
+ *   <tr>
+ *     <td>{@code setPackagesToScan}</td>
+ *     <td>{@code egovframework.repository.jpa.entity}</td>
+ *     <td>JPA Entity 클래스 스캔</td>
+ *   </tr>
+ * </table>
  *
- * <h3>다중 데이터베이스 구성 시 주의사항</h3>
+ * <h2>패키지 구조</h2>
+ * <pre>
+ * egovframework/repository/jpa/
+ * +-- entity/                           <- JPA Entity (@Entity)
+ * |   +-- Member.java
+ * +-- MemberRepository.java             <- JPA Repository (JpaRepository 상속)
+ * </pre>
+ *
+ * <h2>다중 데이터베이스 구성</h2>
  * <p>추가 데이터베이스에 대한 JPA 설정이 필요한 경우, 별도의 설정 클래스를 생성하고
  * <b>반드시 다른 패키지 경로를 지정</b>해야 합니다.</p>
  *
@@ -37,19 +53,34 @@ import java.util.HashMap;
  *     transactionManagerRef = BeanNames.Second_Transaction
  * )
  * public class SecondDBJpaConfig {
- *     // ...
+ *
+ *     @Bean(name = "SecondDBJPAManager")
+ *     public LocalContainerEntityManagerFactoryBean dataEntityManager(...) {
+ *         em.setPackagesToScan("egovframework.repository.secondjpa.entity");
+ *         // ...
+ *     }
  * }
  * }</pre>
  *
- * <h3>패키지 구조 권장사항</h3>
+ * <h2>다중 DB 패키지 구조 권장사항</h2>
  * <pre>
- * egovframework/
- * └── repository/
- *     ├── jpa/          ← 기본 DB용 JPA Repository, Entity
- *     ├── secondjpa/    ← 두번째 DB용 JPA Repository, Entity
- *     └── thirdjpa/     ← 세번째 DB용 JPA Repository, Entity
+ * egovframework/repository/
+ * +-- jpa/                              <- 기본 DB용
+ * |   +-- entity/
+ * |   |   +-- Member.java
+ * |   +-- MemberRepository.java
+ * +-- secondjpa/                        <- 두번째 DB용
+ * |   +-- entity/
+ * |   |   +-- Log.java
+ * |   +-- LogRepository.java
+ * +-- thirdjpa/                         <- 세번째 DB용
+ *     +-- entity/
+ *     +-- ...
  * </pre>
  *
+ * @see egovframework.repository.jpa JPA Repository 패키지 (스캔 대상)
+ * @see egovframework.repository.jpa.entity.Member Entity 클래스 예시
+ * @see egovframework.repository.jpa.MemberRepository Repository 인터페이스 예시
  * @see org.springframework.data.jpa.repository.config.EnableJpaRepositories
  * @see org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
  */
@@ -91,7 +122,7 @@ public class BasicDBJpaConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
         em.setDataSource(dataSource);
-        em.setPackagesToScan("egovframework.repository.jpa"); // JPA Entity 패키지
+        em.setPackagesToScan("egovframework.repository.jpa.entity"); // JPA Entity 패키지
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         // Hibernate JPA 설정

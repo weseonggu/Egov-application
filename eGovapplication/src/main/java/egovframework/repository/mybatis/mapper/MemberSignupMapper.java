@@ -1,6 +1,6 @@
-package egovframework.repository.mapper.member;
+package egovframework.repository.mybatis.mapper;
 
-import egovframework.member.signup.dao.MemberVO;
+import egovframework.repository.mybatis.dao.MemberVO;
 import org.apache.ibatis.annotations.Param;
 import org.egovframe.rte.psl.dataaccess.mapper.EgovMapper;
 

@@ -1,4 +1,4 @@
-package egovframework.repository.jpa;
+package egovframework.repository.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

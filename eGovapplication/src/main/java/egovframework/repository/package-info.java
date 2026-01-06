@@ -31,12 +31,15 @@
  * <h2>패키지 구조</h2>
  * <pre>
  * egovframework.repository/
- * +-- mapper/              <- MyBatis Mapper 인터페이스
- * |   +-- member/          <- 도메인별 하위 패키지
- * |   +-- product/
- * +-- jpa/                 <- JPA Repository + Entity
- *     +-- MemberEntity.java
- *     +-- MemberRepository.java
+ * +-- mybatis/                          <- MyBatis 관련 클래스
+ * |   +-- dao/                          <- VO/DAO 클래스
+ * |   |   +-- MemberVO.java
+ * |   +-- mapper/                       <- Mapper 인터페이스
+ * |       +-- MemberSignupMapper.java
+ * +-- jpa/                              <- JPA 관련 클래스
+ *     +-- entity/                       <- JPA Entity
+ *     |   +-- Member.java
+ *     +-- MemberRepository.java         <- JPA Repository
  * </pre>
  *
  * <h2>역할 분담 가이드</h2>

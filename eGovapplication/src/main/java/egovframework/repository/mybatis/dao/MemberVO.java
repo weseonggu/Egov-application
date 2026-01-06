@@ -1,6 +1,6 @@
-package egovframework.member.signup.dao;
+package egovframework.repository.mybatis.dao;
 
-import egovframework.member.signup.dto.MemberSignupRequestDTO;
+import egovframework.application.member.signup.dto.MemberSignupRequestDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;

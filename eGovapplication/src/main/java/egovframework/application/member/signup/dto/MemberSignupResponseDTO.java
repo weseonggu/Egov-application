@@ -1,4 +1,4 @@
-package egovframework.member.signup.dto;
+package egovframework.application.member.signup.dto;
 
 import lombok.Builder;
 import lombok.Getter;

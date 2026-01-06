@@ -1,7 +1,7 @@
 package egovframework.mapper.member;
 
-import egovframework.member.signup.dao.MemberVO;
-import egovframework.repository.mapper.member.MemberSignupMapper;
+import egovframework.repository.mybatis.dao.MemberVO;
+import egovframework.repository.mybatis.mapper.MemberSignupMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

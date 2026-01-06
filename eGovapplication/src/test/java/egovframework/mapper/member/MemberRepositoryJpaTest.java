@@ -1,7 +1,7 @@
 package egovframework.mapper.member;
 
 import egovframework.common.constants.BeanNames;
-import egovframework.repository.jpa.Member;
+import egovframework.repository.jpa.entity.Member;
 import egovframework.repository.jpa.MemberRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

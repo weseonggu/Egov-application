@@ -1,4 +1,5 @@
 egovframework
+egovframework.application.member.signup.dto
 egovframework.common.constants
 egovframework.common.security
 egovframework.config
@@ -9,7 +10,7 @@ egovframework.config.mybatis
 egovframework.config.security
 egovframework.config.swagger
 egovframework.config.transaction
-egovframework.member.signup.dao
-egovframework.member.signup.dto
 egovframework.repository.jpa
-egovframework.repository.mapper.member
+egovframework.repository.jpa.entity
+egovframework.repository.mybatis.dao
+egovframework.repository.mybatis.mapper
