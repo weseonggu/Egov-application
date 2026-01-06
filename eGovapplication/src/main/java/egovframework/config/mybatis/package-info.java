@@ -28,6 +28,6 @@
  *
  * @see egovframework.config 상위 패키지
  * @see egovframework.config.jpa JPA 설정
- * @see egovframework.repository.mapper Mapper 인터페이스 위치
+ * @see egovframework.repository.mybatis.mapper Mapper 인터페이스 위치
  */
 package egovframework.config.mybatis;
